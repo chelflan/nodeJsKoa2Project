@@ -64,7 +64,7 @@
           title: '',
           author: '',
           category_id: '',
-          cover: 'http://img0.imgtn.bdimg.com/it/u=1454505627,3205650517&fm=26&gp=0.jpg',
+          cover: '',
           content: ''
         },
         ruleValidate: {
