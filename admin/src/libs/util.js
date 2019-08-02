@@ -3,7 +3,7 @@ import axios from 'axios';
 let util = {};
 
 util.title = function (title) {
-  title = title ? title + ' - boblog.com ' : 'boblog.com 后台';
+  title = title ? title + ' - chelflan.cn ' : 'chelflan.cn 后台';
   window.document.title = title;
 };
 

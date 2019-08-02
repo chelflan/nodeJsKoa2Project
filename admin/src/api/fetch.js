@@ -89,7 +89,21 @@ export default {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }
     })
+  },
+
+  upload(url, formData) {
+    debugger
+    return Util.ajax({
+      method: 'post',
+      url: url,
+      data: formData,
+      timeout: 150000,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   }
+
 }
 
 // 转码token

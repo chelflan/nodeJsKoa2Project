@@ -20,6 +20,7 @@
               type="drag"
               action="http://up-z2.qiniu.com"
               :show-upload-list="false"
+              :before-upload	="beforeUpload"
               :on-success="uploadSuccess"
               :on-error="uploadError"
               :data="{token}">
@@ -38,7 +39,8 @@
         <mavon-editor
           v-model="formValidate.content"
           :ishljs="true"
-          ref=md>
+          ref=md
+          @imgAdd="$imgAdd" @imgDel="$imgDel">
         </mavon-editor>
 
       </FormItem>
@@ -56,6 +58,7 @@
   export default {
     data() {
       return {
+        img_file:{},
         token: '',
         id: this.$route.params.id,
         detail: null,
@@ -90,13 +93,53 @@
     methods: {
       ...mapActions({
         createArticle: 'article/createArticle',
-        getCategoryList: 'category/getCategoryList'
+        getCategoryList: 'category/getCategoryList',
+        uploadImg: 'upload/uploadImg'
       }),
-      // 上传图片成功
+      uploadLoadStart(text="....努力上传中....耐心等候....."){
+        this.$Spin.show({
+          render: (h) => {
+            return h('div', [
+              h('Icon', {
+                'class': 'demo-spin-icon-load',
+                props: {
+                  type: 'ios-loading',
+                  size: 30
+                }
+              }),
+              h('div', text)
+            ])
+          }
+        });
+      },
+      uploadLoadEnd(){
+        this.$Spin.hide();
+      },
+      async $imgAdd(pos, $file) {
+        this.uploadLoadStart();
+        // 第一步.将图片上传到服务器.
+        let formdata = new FormData();
+        formdata.append('file', $file);
+        formdata.append('token', this.token);
+        this.img_file[pos] = $file;
+
+        const res = await this.uploadImg(formdata);
+        this.$refs.md.$img2Url(pos, `http://pvjrayatu.bkt.clouddn.com/${res.data.key}`);
+        this.uploadLoadEnd();
+
+      },
+      $imgDel(pos) {
+        delete this.img_file[pos];
+      },
+      // 上传图片成前动画
+      beforeUpload(response) {
+        this.uploadLoadStart();
+      },
       uploadSuccess(response) {
         const url = `http://pvjrayatu.bkt.clouddn.com/${response.key}`;
         this.formValidate.cover = url;
         this.$Message.success('上传成功!');
+        this.uploadLoadEnd();
       },
       // 上传图片失败
       uploadError(response) {
@@ -164,5 +207,9 @@
   .cover .upload {
     width: 280px;
     margin-right: 32px;
+  }
+
+  .demo-spin-icon-load{
+    animation: ani-demo-spin 1s linear infinite;
   }
 </style>
