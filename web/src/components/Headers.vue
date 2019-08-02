@@ -2,7 +2,7 @@
   <section class="header">
     <header class="header-box">
       <section class="logo">
-        <a href="/"><img src="../assets/images/LOGO.png" alt="LOGO"></a>
+        <a href="/"><img src="../assets/images/logoAvatar.png" alt="LOGO"></a>
       </section>
 
       <ul class="nav-dropdown">
@@ -160,10 +160,11 @@
   .logo {
     width: 200px;
     height: 96px;
-    margin-left: -20px;
+    text-align: center;
+    overflow: hidden;
 
     & img {
-      width: 100%;
+      width: 100px;
     }
   }
 
