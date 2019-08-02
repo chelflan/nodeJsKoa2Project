@@ -7,8 +7,15 @@
 const menus = [
     {
       name: "首页",
-      path: "/",
-      icon: "ios-navigate"
+      path: "index",
+      icon: "ios-navigate",
+      children: [
+        {
+          icon: "md-home",
+          name: "数据展示",
+          path: "/"
+        }
+      ]
     },
     // 系统管理
     {

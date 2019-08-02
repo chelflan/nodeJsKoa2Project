@@ -4,7 +4,7 @@
       <Sider ref="side1" hide-trigger collapsible :collapsed-width="80" v-model="isCollapsed" style="overflow-y: auto">
         <div class="layout-logo-left" :style="isCollapsed ? 'font-size:12px': ''">boblog.com</div>
         <Menu
-          :accordion="true"
+          :accordion="false"
           width="auto"
           :class="menuitemClasses"
           @on-select="goLink"

@@ -17,7 +17,7 @@ const routers = [
         //todo: 首页
         path: '/',
         name: 'index',
-        meta: {module: "/", title: '首页'},
+        meta: {module: "/", group: "index",title: '首页'},
         component(resolve) {
           require(['../views/index.vue'], resolve);
         }
