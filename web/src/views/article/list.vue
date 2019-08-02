@@ -280,7 +280,7 @@
 
   .page {
     padding: 32px 0;
-    text-align: center;
+    text-align: left;
   }
 
   @media screen and (min-width: 200px) and (max-width: 768px) {

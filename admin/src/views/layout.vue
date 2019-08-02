@@ -71,21 +71,25 @@
                 v-if="!$route.meta.keep || ($route.meta.keep instanceof Array && $route.meta.keep.length === 0)"/>
             </div>
           </div>
-          <div class="layout-copy">
-            2019 &copy; boblog.com
-          </div>
-        </Content>
+
+          <Footer>
+           <div class="layout-copy">
+            2019 &copy; chelflan.cn
+            </div>
+            </Footer>
+
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
-    <Modal v-model="pictureModal.modal" width="800" title="Image">
-      <img :src="pictureModal.picture" alt="" style="width: 100%;">
-    </Modal>
-  </div>
-</template>
-<script>
-  import {mapState, mapActions, mapMutations} from 'vuex'
-  import {menus} from './menus'
-  import Vue from 'vue'
+      <Modal v-model="pictureModal.modal" width="800" title="Image">
+        <img :src="pictureModal.picture" alt="" style="width: 100%;">
+      </Modal>
+    </div>
+  </template>
+  <script>
+    import {mapState, mapActions, mapMutations} from 'vuex'
+    import {menus} from './menus'
+    import Vue from 'vue'
 
   export default {
     components: {},
