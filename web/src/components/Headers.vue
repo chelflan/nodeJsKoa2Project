@@ -59,6 +59,7 @@
         keyword: '',
         navIndex: 0,
         nav: [
+          {name: '首页', path: '/', icon: 'el-icon-house'},
           {name: '文章', path: '/', icon: 'el-icon-house'},
           // {name: '专栏', path: '/book', icon: 'el-icon-reading\n'},
           {name: '关于', path: '/about', icon: 'el-icon-chat-round'},
