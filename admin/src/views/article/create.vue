@@ -124,7 +124,7 @@
         this.img_file[pos] = $file;
 
         const res = await this.uploadImg(formdata);
-        this.$refs.md.$img2Url(pos, `http://pvjrayatu.bkt.clouddn.com/${res.data.key}`);
+        this.$refs.md.$img2Url(pos, `http://upload.chelflan.cn/${res.data.key}`);
         this.uploadLoadEnd();
 
       },
@@ -136,7 +136,7 @@
         this.uploadLoadStart();
       },
       uploadSuccess(response) {
-        const url = `http://pvjrayatu.bkt.clouddn.com/${response.key}`;
+        const url = `http://upload.chelflan.cn/${response.key}`;
         this.formValidate.cover = url;
         this.$Message.success('上传成功!');
         this.uploadLoadEnd();
