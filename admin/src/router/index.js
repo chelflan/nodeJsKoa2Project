@@ -77,6 +77,13 @@ const routers = [
         meta: {module: "/comments", group: "comments", title: '评论 - 列表'},
         component: (resolve) => require(['../views/comments/list.vue'], resolve),
       },
+      //todo: 每日一花
+      {
+        path: 'flower',
+        name: 'flower',
+        meta: {module: "/flower", group: "flower", title: '每日一花 - 自动更新'},
+        component: (resolve) => require(['../views/flower/flower.vue'], resolve),
+      },
       {
         //todo: 404
         path: '/403',

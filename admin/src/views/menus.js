@@ -75,6 +75,18 @@ const menus = [
           icon: "md-list"
         }
       ]
+    },
+    {
+      name: "每日一花",
+      path: "flower",
+      icon: "md-flower",
+      children: [
+        {
+          name: "自动更新",
+          path: "/flower",
+          icon: "md-clock"
+        }
+      ]
     }
 
   ];

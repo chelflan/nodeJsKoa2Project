@@ -2,7 +2,9 @@
   <div class="layout">
     <Layout>
       <Sider ref="side1" hide-trigger collapsible :collapsed-width="80" v-model="isCollapsed" style="overflow-y: auto">
-        <div class="layout-logo-left" :style="isCollapsed ? 'font-size:12px': ''">boblog.com</div>
+        <div class="layout-logo-left" :style="isCollapsed ? 'font-size:15px': ''">
+          <a href="http://www.chelflan.cn" target="view_window">chelflan.cn</a>
+        </div>
         <Menu
           :accordion="false"
           width="auto"
