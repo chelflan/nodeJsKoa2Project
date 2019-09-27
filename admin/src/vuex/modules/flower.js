@@ -7,8 +7,8 @@ const actions = {
   async getBatchgetMaterial({state, commit}, params) {
     return flower.list(params);
   },
-  getToken(){
-    return flower.getToken();
+  getFlowerList(){
+    return flower.getFlowerList();
   },
   // 更新
   async updateMaterial({state, commit}, id) {

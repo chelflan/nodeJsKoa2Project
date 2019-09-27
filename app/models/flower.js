@@ -83,7 +83,7 @@ Flower.init({
         defaultValue: 0
     }
 }, {
-    sequelize1,
+    sequelize: sequelize1,
     tableName: 'zbp_post'
 })
 

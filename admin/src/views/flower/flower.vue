@@ -1,7 +1,7 @@
 <template>
     <div>
       每日更新
-      <Button @click="_getToken">点击</Button>
+      <Button @click="_getFlowerList">点击</Button>
     </div>
 </template>
 
@@ -11,28 +11,27 @@
         name: "flower",
         data(){
           return{
-
+            currentPage:0,
+            count:10
           }
         },
        created(){
-          this._getToken();
+          this._getFlowerList();
        },
       methods:{
         ...mapActions({
           getBatchgetMaterial: 'flower/getBatchgetMaterial',
           updateMaterial: 'flower/updateMaterial',
-          getToken: 'flower/getToken',
+          getFlowerList: 'flower/getFlowerList',
         }),
-        async _getBatchgetMaterial(){
-          const res = await this.getBatchgetMaterial({
-            offset: 0,
-            count:2
+        async _getFlowerList(){
+          const res = await this.getFlowerList({
+            offest: this.currentPage,
+            count: this.count
+
           });
 
-         },
-        async _getToken(){
-          const res = await this.getToken();
-          console.log(res,"-------res")
+          console.log(res,"----结果---res")
          }
       }
     }

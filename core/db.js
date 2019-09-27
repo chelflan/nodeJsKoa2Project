@@ -53,29 +53,32 @@ const sequelize1 = new Sequelize(dbName1, user1, password1, {
     port1,
     logging: true,
     timezone: '+08:00',
-    define: {
-        // create_time && update_time
-        timestamps: true,
-        // delete_time
-        paranoid: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
-        deletedAt: 'deleted_at',
-        // 把驼峰命名转换为下划线
-        underscored: true,
-        scopes: {
-            bh: {
-                attributes: {
-                    exclude: ['password', 'updated_at', 'deleted_at', 'created_at']
-                }
-            },
-            iv: {
-                attributes: {
-                    exclude: ['content', 'password', 'updated_at', 'deleted_at']
-                }
-            }
-        }
-    }
+    // dialectOptions: {
+    //     socketPath: '/tmp/mysql.sock' // 指定套接字文件路径
+    // }
+    // define: {
+    //     // create_time && update_time
+    //     timestamps: true,
+    //     // delete_time
+    //     paranoid: true,
+    //     createdAt: 'created_at',
+    //     updatedAt: 'updated_at',
+    //     deletedAt: 'deleted_at',
+    //     // 把驼峰命名转换为下划线
+    //     underscored: true,
+    //     scopes: {
+    //         bh: {
+    //             attributes: {
+    //                 exclude: ['password', 'updated_at', 'deleted_at', 'created_at']
+    //             }
+    //         },
+    //         iv: {
+    //             attributes: {
+    //                 exclude: ['content', 'password', 'updated_at', 'deleted_at']
+    //             }
+    //         }
+    //     }
+    // }
 })
 
 // 创建模型
