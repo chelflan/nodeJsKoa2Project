@@ -12,7 +12,7 @@ const {WeChat} = require('../../lib/wechat')
 //全局配置参数
 const path = require('path');
 const util = require('../../lib/util');
-const wechat_file = path.join(__dirname,'wechat.txt');
+const wechat_file = path.join(__dirname,'../../lib/wechat.txt');
 
 const {
     appId,
@@ -63,11 +63,18 @@ router.post('/flower', async (ctx) => {
 // 获取列表
 router.get('/flower', async (ctx) => {
     //查询accesstoken
-    // let weChatInstance = new WeChat(config);
+    let weChatInstance = new WeChat(config);
 
+    //获取access_token
+    let wechatParam = await util.readFileAsync(wechat_file,'utf-8');
+   //  //获取素材总数
+   //  let allCount = await weChatInstance.getMaterialCount(JSON.parse(wechatParam).access_token);
+   // //获取图文素材
+    let list = await weChatInstance.getMaterialList(JSON.parse(wechatParam).access_token);
+    console.log(list,"list")
     // 返回结果
     ctx.response.status = 200;
-    ctx.body = res.json(weChatInstance);
+    ctx.body = res.json(wechatParam);
 
 })
 
