@@ -83,22 +83,25 @@ class WeChat{
         })
     }
 
-    getMaterialList(accessToken){
-        // let url = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token="+accessToken;
-        let url = "https://api.weixin.qq.com/cgi-bin/material/get_material?access_token="+accessToken;
+    getMaterialList(accessToken,offest,count,type='news'){
+        let url = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token="+accessToken;
         let data = {
-            type:"news",
-            offset:0,
-            count:10
-        }
-
-
-       let bb = {
-            "media_id":"GvnDcC2QjGEN4AUqdM7DyXCH1ZiwO_gBY1xV0qu-z0Y"
+            type: type,
+            offset: offest,
+            count: count
         }
 
         return new Promise(function (resolve, reject) {
-            request({url: url,method:"POST",formData:bb,json: true}, function (error, response, body) {
+            request({
+                url: url,
+                method:"POST",
+                // body:JSON.stringify(data),
+                body:data,
+                json: true,
+                headers: {
+                    "content-type": "application/json"
+                }
+            }, function (error, response, body) {
                 if (!error && response.statusCode === 200) {
                     resolve(body);
                 } else {

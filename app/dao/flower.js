@@ -6,8 +6,8 @@ class FlowerDao {
 
         const flower = new Flower();
 
-        flower.nickname = v.get('body.nickname');
-        flower.email = v.get('body.email');
+        flower.log_Title = v.get('body.title');
+        flower.log_Intro = v.get('body.email');
         flower.content = v.get('body.content');
         flower.article_id = v.get('body.article_id');
         flower.parent_id = v.get('body.parent_id');

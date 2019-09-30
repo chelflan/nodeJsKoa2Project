@@ -25,6 +25,7 @@ router.post('/category', new Auth(AUTH_ADMIN).m, async (ctx) => {
     // 通过验证器校验参数是否通过
     const v = await new CategoryValidator().validate(ctx);
 
+
     await CategoryDao.createCategory(v);
 
     // 返回结果

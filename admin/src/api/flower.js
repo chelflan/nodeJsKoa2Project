@@ -8,8 +8,8 @@ export default {
   getFlowerList(params){
     return fetch.get("/flower",params)
   },
-  // 更新
-  updateMaterial(id) {
-    return fetch.delete('/flower/' + id);
+  // 插入到每日一花
+  insertFlower(param) {
+    return fetch.postOne('/dailyFlower',params);
   }
 }

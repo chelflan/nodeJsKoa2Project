@@ -2,6 +2,7 @@ const Router = require('koa-router')
 
 const {FlowerDao} = require('../../dao/flower')
 const {Auth} = require('../../../middlewares/auth');
+const {FlowerValidator} = require('../../validators/flower')
 
 const {Resolve} = require('../../lib/helper');
 const res = new Resolve();
@@ -62,6 +63,10 @@ router.post('/flower', async (ctx) => {
 
 // 获取列表
 router.get('/flower', async (ctx) => {
+
+    const offest = ctx.query.offest;
+    const count = ctx.query.count;
+
     //查询accesstoken
     let weChatInstance = new WeChat(config);
 
@@ -70,16 +75,31 @@ router.get('/flower', async (ctx) => {
    //  //获取素材总数
    //  let allCount = await weChatInstance.getMaterialCount(JSON.parse(wechatParam).access_token);
    // //获取图文素材
-    let list = await weChatInstance.getMaterialList(JSON.parse(wechatParam).access_token);
+    let list = await weChatInstance.getMaterialList(JSON.parse(wechatParam).access_token,offest,count);
     console.log(list,"list")
     // 返回结果
     ctx.response.status = 200;
-    ctx.body = res.json(wechatParam);
+    ctx.body = res.json(list);
 
 })
 
+router.get('/dailyFlower', async (ctx) => {
 
+    // const title = ctx.query.title;
+    // const content = ctx.query.content;
 
+    // 通过验证器校验参数是否通过
+    const v = await new FlowerValidator().validate(ctx);
+
+    await FlowerDao.createCategory(v);
+
+    const r = await FlowerDao.createComments(v);
+    // 返回结果
+    ctx.response.status = 200;
+    // ctx.body = res.json();
+    ctx.body = res.success('创建分类成功')
+
+})
 
 
 module.exports = router

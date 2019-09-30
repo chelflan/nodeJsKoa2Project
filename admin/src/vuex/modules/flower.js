@@ -14,12 +14,12 @@ const actions = {
 
     return flower.list(params.accessToken,p);
   },
-  getFlowerList(){
-    return flower.getFlowerList();
+  getFlowerList({state, commit},params){
+    return flower.getFlowerList(params);
   },
-  // 更新
-  async updateMaterial({state, commit}, id) {
-    return flower.updateMaterial(id);
+  // 插入到每日一花
+  async insertFlower({state, commit}, params) {
+    return flower.insertFlower(params);
   }
 };
 

@@ -13,41 +13,34 @@ Flower.init({
         primaryKey: true,
         autoIncrement: true
     },
-    //
     log_CateID: {
     type:Sequelize.INTEGER,
     defaultValue: 2
     },
-    //
     log_AuthorID: {
         type:Sequelize.INTEGER,
         defaultValue: 1
     },
-    //
     log_Tag: {
         type:Sequelize.STRING,
-        defaultValue: ""
+        defaultValue: "wechat"
     },
-    //
     log_Status: {
         type:Sequelize.INTEGER,
         defaultValue: 0
     },
-    // 评论父级ID，默认为0
     log_Type: {
         type: Sequelize.INTEGER,
         defaultValue: 0
     },
     log_Alias: {
         type:Sequelize.STRING,
-        defaultValue: ""
+        defaultValue: "dailyflower"
     },
-    // 文章ID
     log_IsTop: {
         type:Sequelize.INTEGER,
         defaultValue: 0
     },
-    // 评论父级ID，默认为0
     log_IsLock: {
         type: Sequelize.INTEGER,
         defaultValue: 0
@@ -56,9 +49,7 @@ Flower.init({
         type: Sequelize.STRING
     },
     log_Intro: Sequelize.STRING,
-    // 文章ID
     log_Content: Sequelize.STRING,
-    // 评论父级ID，默认为0
     log_PostTime: {
         type: Sequelize.INTEGER,
         get() {
@@ -73,7 +64,6 @@ Flower.init({
         type: Sequelize.INTEGER,
         defaultValue: 0
     },
-    // 文章ID
     log_Template: {
         type:Sequelize.STRING,
         defaultValue: ""
