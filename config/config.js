@@ -8,11 +8,11 @@ module.exports = {
         password: 'user'
     },
     databaseDailyFlower: {
-        dbName: 'dailyflower',
-        host: '139.155.24.81',
-        port: 3380,
-        user: 'user',
-        password: 'user'
+        dbNameFlower: 'dailyflower',
+        hostFlower: '139.155.24.81',
+        portFlower: 3380,
+        userFlower: 'user',
+        passwordFlower: 'user'
     },
     security: {
         secretKey: "secretKey",

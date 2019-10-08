@@ -11,7 +11,7 @@
           <template slot-scope="{ row, index }" slot="action">
             <!--<Button type="error" size="small" @click="destroy(row.id)">删除</Button>-->
             <Button type="primary" size="small" @click="view(row)">查看</Button>
-            <Button type="primary" size="small" @click="insertFlower(row)">插入</Button>
+            <Button type="primary" size="small" @click="insertFlowerSingel(row)">插入</Button>
           </template>
         </Table>
 
@@ -101,9 +101,10 @@
           this.page.currentPage = curentPage;
           this._getFlowerList();
         },
-        async insertFlower(row){
-          const res = await this.insertFlower(row);
-          console.log(res,"res")
+        insertFlowerSingel(row){
+          // const res = await this.insertFlower(row);
+          const res = this.insertFlower(row);
+          console.log(row,"row")
         }
       }
     }

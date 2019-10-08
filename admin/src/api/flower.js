@@ -9,7 +9,7 @@ export default {
     return fetch.get("/flower",params)
   },
   // 插入到每日一花
-  insertFlower(param) {
+  insertFlower(params) {
     return fetch.postOne('/dailyFlower',params);
   }
 }

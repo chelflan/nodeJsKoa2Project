@@ -9,11 +9,11 @@ const {
 } = require('../config/config').database
 
 const {
-    dbName1,
-    host1,
-    port1,
-    user1,
-    password1
+    dbNameFlower,
+    hostFlower,
+    portFlower,
+    userFlower,
+    passwordFlower
 } = require('../config/config').databaseDailyFlower
 
 const sequelize = new Sequelize(dbName, user, password, {
@@ -47,38 +47,12 @@ const sequelize = new Sequelize(dbName, user, password, {
     }
 })
 
-const sequelize1 = new Sequelize(dbName1, user1, password1, {
+const sequelizeFlower = new Sequelize(dbNameFlower, userFlower, passwordFlower, {
     dialect: 'mysql',
-    host1,
-    port1,
+    host:hostFlower,
+    port:portFlower,
     logging: true,
-    timezone: '+08:00',
-    // dialectOptions: {
-    //     socketPath: '/tmp/mysql.sock' // 指定套接字文件路径
-    // }
-    // define: {
-    //     // create_time && update_time
-    //     timestamps: true,
-    //     // delete_time
-    //     paranoid: true,
-    //     createdAt: 'created_at',
-    //     updatedAt: 'updated_at',
-    //     deletedAt: 'deleted_at',
-    //     // 把驼峰命名转换为下划线
-    //     underscored: true,
-    //     scopes: {
-    //         bh: {
-    //             attributes: {
-    //                 exclude: ['password', 'updated_at', 'deleted_at', 'created_at']
-    //             }
-    //         },
-    //         iv: {
-    //             attributes: {
-    //                 exclude: ['content', 'password', 'updated_at', 'deleted_at']
-    //             }
-    //         }
-    //     }
-    // }
+    timezone: '+08:00'
 })
 
 // 创建模型
@@ -86,13 +60,11 @@ sequelize.sync({
     force: false
 })
 
-sequelize1.sync({
+sequelizeFlower.sync({
     force: false
 })
 
 module.exports = {
     sequelize,
-    sequelize1
+    sequelizeFlower
 }
-
-// 数据迁移 SQL 更新

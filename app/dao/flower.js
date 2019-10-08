@@ -7,10 +7,8 @@ class FlowerDao {
         const flower = new Flower();
 
         flower.log_Title = v.get('body.title');
-        flower.log_Intro = v.get('body.email');
-        flower.content = v.get('body.content');
-        flower.article_id = v.get('body.article_id');
-        flower.parent_id = v.get('body.parent_id');
+        flower.log_Intro = v.get('body.digest');
+        flower.log_Content = v.get('body.content');
 
         return flower.save();
     }

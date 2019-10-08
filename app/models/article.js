@@ -36,7 +36,7 @@ Article.init({
         }
     }
 }, {
-    sequelize,
+    sequelize: sequelize,
     tableName: 'article'
 })
 

@@ -1,7 +1,7 @@
 const moment = require('moment');
 
 const {Sequelize, Model} = require('sequelize')
-const {sequelize1} = require('../../core/db')
+const {sequelizeFlower} = require('../../core/db')
 
 class Flower extends Model {
 
@@ -72,8 +72,8 @@ Flower.init({
         type: Sequelize.STRING,
         defaultValue: 0
     }
-}, {
-    sequelize: sequelize1,
+    }, {
+    sequelize: sequelizeFlower,
     tableName: 'zbp_post'
 })
 

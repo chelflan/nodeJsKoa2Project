@@ -83,7 +83,7 @@ router.get('/flower', async (ctx) => {
 
 })
 
-router.get('/dailyFlower', async (ctx) => {
+router.post('/dailyFlower', async (ctx) => {
 
     // const title = ctx.query.title;
     // const content = ctx.query.content;
@@ -91,13 +91,11 @@ router.get('/dailyFlower', async (ctx) => {
     // 通过验证器校验参数是否通过
     const v = await new FlowerValidator().validate(ctx);
 
-    await FlowerDao.createCategory(v);
-
-    const r = await FlowerDao.createComments(v);
+    const r = await FlowerDao.createFlower(v);
     // 返回结果
     ctx.response.status = 200;
     // ctx.body = res.json();
-    ctx.body = res.success('创建分类成功')
+    ctx.body = res.success('创建成功')
 
 })
 
