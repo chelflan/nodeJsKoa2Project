@@ -9,6 +9,7 @@ class FlowerDao {
         flower.log_Title = v.get('body.title');
         flower.log_Intro = v.get('body.digest');
         flower.log_Content = v.get('body.content');
+        flower.log_PostTime = v.get('body.update_time');
 
         return flower.save();
     }

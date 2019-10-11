@@ -52,7 +52,7 @@ Flower.init({
     log_Content: Sequelize.STRING,
     log_PostTime: {
         type: Sequelize.INTEGER,
-        defaultValue:new Date().getTime()/1000
+        // defaultValue:new Date().getTime()/1000
         // get() {
         //     return moment(new Date().getTime());
         // }
