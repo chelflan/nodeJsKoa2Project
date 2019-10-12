@@ -10,12 +10,26 @@ class FlowerDao {
         flower.log_Intro = v.get('body.digest');
         flower.log_Content = v.get('body.content');
         flower.log_PostTime = v.get('body.update_time');
+        flower.media_id = v.get('body.media_id');
+
+
+        // 检测是否存在文章
+        const hasFlower = await Flower.findOne({
+            where: {
+                media_id: v.get('body.media_id')
+            }
+        });
+
+        // 如果存在，抛出存在信息
+        if (hasFlower) {
+            throw new global.errs.Existing( v.get('body.title')+'---这篇文章已存在');
+        }
 
         return flower.save();
     }
 
-    // 删除评论
-    static async destroyFlower(id) {
+    // 根据media_id来查询结果
+    static async queryFlowerByMd(id) {
         const flower = await Flower.findOne({
             where: {
                 id,

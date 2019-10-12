@@ -93,6 +93,9 @@ router.post('/dailyFlower', async (ctx) => {
 
     const r = await FlowerDao.createFlower(v);
     // 返回结果
+
+
+    debugger
     ctx.response.status = 200;
     // ctx.body = res.json();
     ctx.body = res.success('创建成功')
