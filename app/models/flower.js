@@ -13,9 +13,6 @@ Flower.init({
         primaryKey: true,
         autoIncrement: true
     },
-    media_id: {
-        type: Sequelize.STRING
-    },
     log_CateID: {
     type:Sequelize.INTEGER,
     defaultValue: 2

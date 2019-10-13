@@ -52,7 +52,12 @@ const sequelizeFlower = new Sequelize(dbNameFlower, userFlower, passwordFlower, 
     host:hostFlower,
     port:portFlower,
     logging: true,
-    timezone: '+08:00'
+    timezone: '+08:00',
+    define: {
+        createdAt: false,
+        updatedAt: false,
+        deletedAt: false,
+    }
 })
 
 // 创建模型

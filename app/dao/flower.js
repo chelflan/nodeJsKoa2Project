@@ -10,13 +10,13 @@ class FlowerDao {
         flower.log_Intro = v.get('body.digest');
         flower.log_Content = v.get('body.content');
         flower.log_PostTime = v.get('body.update_time');
-        flower.media_id = v.get('body.media_id');
+        flower.log_Template = v.get('body.media_id');
 
 
         // 检测是否存在文章
         const hasFlower = await Flower.findOne({
             where: {
-                media_id: v.get('body.media_id')
+                log_Template: v.get('body.media_id')
             }
         });
 
