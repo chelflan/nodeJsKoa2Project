@@ -7,10 +7,10 @@
         </Select>
       </FormItem>
       <FormItem label="菜单名称" prop="name">
-        <Input v-model="formValidate.name" placeholder="菜单名称"></Input>
+        <Input v-model="formValidate.name" placeholder="菜单名称"/>
       </FormItem>
       <FormItem label="菜单关键字" prop="key">
-        <Input v-model="formValidate.key" placeholder="菜单关键字"></Input>
+        <Input v-model="formValidate.key" placeholder="菜单关键字"/>
       </FormItem>
       <FormItem>
         <Button @click="handleReset('formValidate')">重置</Button>
