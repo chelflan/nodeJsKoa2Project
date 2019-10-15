@@ -48,6 +48,23 @@ const menus = [
       ]
     },
     {
+      name: "菜单管理",
+      path: "menu",
+      icon: "md-menu",
+      children: [
+        {
+          name: "菜单列表",
+          path: "/menu",
+          icon: "md-list"
+        },
+        {
+          name: "菜单创建",
+          path: "/menu/create",
+          icon: "md-add-circle"
+        }
+      ]
+    },
+    {
       name: "文章管理",
       path: "article",
       icon: "md-list-box",
