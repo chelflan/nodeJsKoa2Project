@@ -120,7 +120,8 @@
             digest: item.content.news_item[0].digest,
             title: item.content.news_item[0].title,
             url: item.content.news_item[0].url,
-            thumb_url: item.content.news_item[0].thumb_url
+            thumb_url: item.content.news_item[0].thumb_url,
+            tag: "",
           });
         }
       },

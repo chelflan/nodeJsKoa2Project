@@ -11,7 +11,7 @@ class FlowerDao {
         flower.log_Content = v.get('body.content');
         flower.log_PostTime = v.get('body.update_time');
         flower.log_Template = v.get('body.media_id');
-
+        flower.log_Tag = v.get('body.tag');
 
         // 检测是否存在文章
         const hasFlower = await Flower.findOne({

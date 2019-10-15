@@ -1,6 +1,7 @@
 const Router = require('koa-router')
 
 const {FlowerDao} = require('../../dao/flower')
+const {FlowerTagsDao} = require('../../dao/flowerTags')
 const {Auth} = require('../../../middlewares/auth');
 const {FlowerValidator} = require('../../validators/flower')
 
@@ -91,6 +92,12 @@ router.post('/dailyFlower', async (ctx) => {
     // 通过验证器校验参数是否通过
     const v = await new FlowerValidator().validate(ctx);
 
+    //插入tags
+    const rt = await FlowerTagsDao.createFlowerTags( v.get('body.title'));
+
+    let newTags = "{1}{"+rt.tag_ID+"}";
+//记录一下
+     v.parsed.body.tag = newTags;
     const r = await FlowerDao.createFlower(v);
     // 返回结果
 
