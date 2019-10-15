@@ -6,7 +6,7 @@
           <a href="http://www.chelflan.cn" target="view_window">chelflan.cn</a>
         </div>
         <Menu
-          :accordion="false"
+          :accordion="true"
           width="auto"
           :class="menuitemClasses"
           @on-select="goLink"
