@@ -38,7 +38,7 @@ class ArticleDao {
     }
 
     // 获取文章列表
-    static async getArticleList(page = 1, desc = 'created_at', category_id, keyword) {
+    static async getArticleList(page = 1, desc = 'created_at', category_id,menu_id,keyword) {
         const pageSize = 10;
         // 筛选方式
         let filter = {
@@ -48,6 +48,11 @@ class ArticleDao {
         // 筛选方式：存在分类ID
         if (category_id) {
             filter.category_id = category_id;
+        }
+
+        // 筛选方式：存在分类ID
+        if (menu_id) {
+            filter.menu_id = menu_id;
         }
 
         // 筛选方式：存在搜索关键字
@@ -66,11 +71,13 @@ class ArticleDao {
         });
 
         const categoryIds = [];
+        const menuIds = [];
         const articleIds = [];
 
         const r = article.rows;
         r.forEach(article => {
             articleIds.push(article.id);
+            menuIds.push(article.menu_id);
             categoryIds.push(article.category_id);
         });
 

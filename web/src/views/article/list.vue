@@ -52,6 +52,7 @@
     </article>
 
     <div class="sidebar">
+      <v-search/>
       <v-category/>
       <v-links/>
     </div>
@@ -59,7 +60,7 @@
 </template>
 <script>
   import VCategory from '../../components/Category'
-
+  import VSearch from '../../components/Search'
   import VLinks from '../../components/Links'
   import {mapState, mapActions} from 'vuex'
   import merge from 'webpack-merge'
@@ -67,7 +68,8 @@
   export default {
     components: {
       VCategory,
-      VLinks
+      VLinks,
+      VSearch
     },
     data() {
       return {

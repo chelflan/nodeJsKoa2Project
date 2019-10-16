@@ -22,6 +22,8 @@ Article.init({
     content: Sequelize.TEXT,
     // 文章封面
     cover: Sequelize.STRING,
+    // 文章所属菜单ID
+    menu_id: Sequelize.STRING,
     // 文章分类ID
     category_id: Sequelize.STRING,
     // 文章浏览次数
