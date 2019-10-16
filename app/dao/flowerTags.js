@@ -5,22 +5,22 @@ class FlowerTagsDao {
     static async createFlowerTags(v) {
 
         // 检测是否存在文章
-        const hasFlower = await FlowerTags.findOne({
+        const tags = await FlowerTags.findOne({
             where: {
                 tag_Name: v //v.get('body.tagsName')
             }
         });
 
-        const flowerTags = new FlowerTags();
+
         // 如果存在，抛出存在信息
-        if (hasFlower) {
+        if (tags) {
             // throw new global.errs.Existing( v.get('body.title')+'---这篇文章已存在');
-            flowerTags.tag_Count = flowerTags.tag_Count+1;
+            tags.tag_Count = tags.tag_Count+1;
+            return tags.save();
         }
 
-    
-        flowerTags.tag_Name = v;//v.get('body.tagsName');
-
+        const flowerTags = new FlowerTags();
+        flowerTags.tag_Name = v;
         return flowerTags.save();
     }
 

@@ -14,15 +14,24 @@ class FlowerDao {
         flower.log_Tag = v.get('body.tag');
 
         // 检测是否存在文章
-        const hasFlower = await Flower.findOne({
+        const flowerQuery = await Flower.findOne({
             where: {
                 log_Template: v.get('body.media_id')
             }
         });
 
+
         // 如果存在，抛出存在信息
-        if (hasFlower) {
-            throw new global.errs.Existing( v.get('body.title')+'---这篇文章已存在');
+        if (flowerQuery) {
+            // throw new global.errs.Existing( v.get('body.title')+'---这篇文章已存在');
+            //如果存在则覆盖
+            flowerQuery.log_Title = v.get('body.title');
+            flowerQuery.log_Intro = v.get('body.digest');
+            flowerQuery.log_Content = v.get('body.content');
+            flowerQuery.log_PostTime = v.get('body.update_time');
+            flowerQuery.log_Template = v.get('body.media_id');
+            flowerQuery.log_Tag = v.get('body.tag');
+            return  flowerQuery.save();;
         }
 
         return flower.save();

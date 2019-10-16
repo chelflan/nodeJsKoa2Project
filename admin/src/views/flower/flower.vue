@@ -121,9 +121,16 @@
             title: item.content.news_item[0].title,
             url: item.content.news_item[0].url,
             thumb_url: item.content.news_item[0].thumb_url,
-            tag: "",
+            tag: this.formatTag(item.content.news_item[0].title)
           });
         }
+      },
+      formatTag(title){
+        let reg = /[\u4e00-\u9fa5]/g;
+        if(title.indexOf("-") == -1){
+          return "";
+        }
+        return "dailyFlower_"+title.split("-")[1].match(reg).join("");
       },
       formatPara(itemData) {
         let strValue = itemData.content;

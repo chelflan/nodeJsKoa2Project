@@ -93,16 +93,14 @@ router.post('/dailyFlower', async (ctx) => {
     const v = await new FlowerValidator().validate(ctx);
 
     //插入tags
-    const rt = await FlowerTagsDao.createFlowerTags( v.get('body.title'));
+    const rt = await FlowerTagsDao.createFlowerTags( v.get('body.tag'));
 
     let newTags = "{1}{"+rt.tag_ID+"}";
-//记录一下
+    //记录一下 使用parsed而不是data
      v.parsed.body.tag = newTags;
     const r = await FlowerDao.createFlower(v);
     // 返回结果
-
-
-    debugger
+    //debugger
     ctx.response.status = 200;
     // ctx.body = res.json();
     ctx.body = res.success('创建成功')
