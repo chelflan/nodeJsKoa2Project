@@ -2,10 +2,10 @@
   <section>
     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
       <FormItem label="文章标题" prop="title">
-        <Input v-model="formValidate.title" placeholder="文章标题"></Input>
+        <Input v-model="formValidate.title" placeholder="文章标题"/>
       </FormItem>
       <FormItem label="文章作者" prop="author">
-        <Input v-model="formValidate.author" placeholder="文章作者"></Input>
+        <Input v-model="formValidate.author" placeholder="文章作者"/>
       </FormItem>
       <FormItem label="所属菜单" prop="menu" v-if="menuList.length > 0">
         <Select v-model="formValidate.menu_id">
