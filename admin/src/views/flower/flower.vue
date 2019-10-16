@@ -206,6 +206,7 @@
       },
       handlePage(curentPage) {
         this.page.currentPage = curentPage;
+        this.selectData = [];
         this._getFlowerList();
       },
       insertFlowerSingel(row) {
