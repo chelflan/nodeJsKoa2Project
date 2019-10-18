@@ -67,7 +67,7 @@ export default {
         },
         {
           title: "菜单下的文章数",
-          key: "article_nums"
+          key: "menu_nums"
         },
         {
           title: "Action",

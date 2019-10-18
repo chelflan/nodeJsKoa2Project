@@ -4,9 +4,9 @@ const {ArticleDao} = require('../dao/article')
 const {Sequelize, Op} = require('sequelize')
 
 class MenuDao {
-    // 创建分类
+    // 创建菜单
     static async createMenu(v) {
-        // 查询是否存在重复的分类
+        // 查询是否存在重复的菜单
         const hasMenu = await Menu.findOne({
             where: {
                 key: v.get('body.key'),
@@ -15,7 +15,7 @@ class MenuDao {
         });
 
         if (hasMenu) {
-            throw new global.errs.Existing('分类已存在');
+            throw new global.errs.Existing('菜单已存在');
         }
         ;
 
@@ -27,9 +27,9 @@ class MenuDao {
         menu.save();
     }
 
-    // 删除分类
+    // 删除菜单
     static async destroyMenu(id) {
-        // 查询分类
+        // 查询菜单
         const menu = await Menu.findOne({
             where: {
                 id,
@@ -37,13 +37,13 @@ class MenuDao {
             }
         });
         if (!menu) {
-            throw new global.errs.NotFound('没有找到相关分类');
+            throw new global.errs.NotFound('没有找到相关菜单');
 
         }
         menu.destroy()
     }
 
-    // 获取分类详情
+    // 获取菜单详情
     static async getMenu(id) {
         const menu = await Menu.scope('bh').findOne({
             where: {
@@ -52,17 +52,17 @@ class MenuDao {
             }
         });
         if (!menu) {
-            throw new global.errs.NotFound('没有找到相关分类');
+            throw new global.errs.NotFound('没有找到相关菜单');
         }
 
         return menu
     }
 
-    // 更新分类
+    // 更新菜单
     static async updateMenu(id, v) {
         const menu = await Menu.findByPk(id);
         if (!menu) {
-            throw new global.errs.NotFound('没有找到相关分类');
+            throw new global.errs.NotFound('没有找到相关菜单');
         }
         menu.name = v.get('body.name');
         menu.key = v.get('body.key');
@@ -71,7 +71,7 @@ class MenuDao {
         menu.save();
     }
 
-    // 分类列表
+    // 菜单列表
     static async getMenuList() {
         const menu = await Menu.scope('bh').findAll({
             where: {
@@ -79,7 +79,7 @@ class MenuDao {
             }
         });
 
-        // 统计每个分类下有多少文章
+        // 统计每个菜单下有多少文章
         const ids = [];
         menu.forEach(item => {
             ids.push(item.id);
@@ -94,34 +94,34 @@ class MenuDao {
 
     }
 
-    // 获取每个分类下有多少文章
+    // 获取每个菜单下有多少文章
     static async _getArticle(ids) {
         return await Article.scope('bh').findAll({
             where: {
-                category_id: {
+                menu_id: {
                     [Op.in]: ids
                 }
             },
-            group: ['category_id'],
-            attributes: ['category_id', [Sequelize.fn('COUNT', '*'), 'count']]
+            group: ['menu_id'],
+            attributes: ['menu_id', [Sequelize.fn('COUNT', '*'), 'count']]
         })
     }
 
-    // 设置每个分类下的文章总数
+    // 设置每个菜单下的文章总数
     static _setArticle(menu, article) {
         let count = 0;
         article.forEach(item => {
-            if (parseInt(menu.id) === parseInt(item.category_id)) {
+            if (parseInt(menu.id) === parseInt(item.menu_id)) {
                 count = item.get('count')
             }
         })
-        menu.setDataValue('article_nums', count);
+        menu.setDataValue('menu_nums', count);
 
         return menu
     }
 
-    // 获取一个分类下的文章
-    static async getMenuArticle(category_id, page = 1, desc = 'created_at') {
+    // 获取一个菜单下的文章
+    static async getMenuArticle(menu_id, page = 1, desc = 'created_at') {
         const pageSize = 10;
 
         const article = await Article.scope('iv').findAndCountAll({
@@ -129,20 +129,20 @@ class MenuDao {
             offset: (page - 1) * pageSize,
             where: {
                 deleted_at: null,
-                category_id
+                menu_id
             },
             order: [
                 [desc, 'DESC']
             ]
         });
 
-        const categoryIds = [];
+        const menuIds = [];
         const articleIds = [];
 
         const r = article.rows;
         r.forEach(article => {
             articleIds.push(article.id);
-            categoryIds.push(article.category_id);
+            menuIds.push(article.menu_id);
         });
 
 
@@ -152,10 +152,10 @@ class MenuDao {
             ArticleDao._setArticleComments(article, comments)
         });
 
-        // 获取每篇文章分类详情
-        const menu = await ArticleDao._getArticleMenuDetail(categoryIds);
+        // 获取每篇文章菜单详情
+        const menu = await ArticleDao._getArticleMenuDetail(menuIds);
         r.forEach(article => {
-            ArticleDao._setArticleCategoryDetail(article, menu)
+            ArticleDao._setArticleMenuDetail(article, menu)
         });
 
         return {

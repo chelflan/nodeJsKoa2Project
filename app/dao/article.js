@@ -156,6 +156,17 @@ class ArticleDao {
         return article
     }
 
+     // 设置每章文章菜单详情
+     static _setArticleMenuDetail(article, menu) {
+        menu.forEach(item => {
+            if (parseInt(article.menu_id) === parseInt(item.id)) {
+                article.setDataValue('menu_detail', item);
+            }
+        })
+
+        return article
+    }
+
 
     // 删除文章
     static async destroyArticle(id) {
