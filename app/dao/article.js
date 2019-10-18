@@ -33,6 +33,7 @@ class ArticleDao {
         article.cover = v.get('body.cover');
         article.browse = v.get('body.browse');
         article.category_id = v.get('body.category_id');
+        article.menu_id = v.get('body.menu_id');
 
         article.save();
     }
@@ -190,6 +191,7 @@ class ArticleDao {
         article.cover = v.get('body.cover');
         article.browse = v.get('body.browse');
         article.category_id = v.get('body.category_id');
+        article.menu_id = v.get('body.menu_id');
 
         article.save();
     }

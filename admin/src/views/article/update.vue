@@ -7,6 +7,11 @@
       <FormItem label="文章作者" prop="author">
         <Input v-model="formValidate.author" placeholder="文章作者"></Input>
       </FormItem>
+      <FormItem label="所属菜单" prop="menu" v-if="menuList.length > 0">
+        <Select v-model="formValidate.menu_id">
+          <Option v-for="(item, index) in menuList" :value="item.id" :key="index">{{item.name}}</Option>
+        </Select>
+      </FormItem>
       <FormItem label="文章分类" v-if="categoryList.length > 0">
         <Select v-model="formValidate.category_id">
           <Option v-for="(item, index) in categoryList" :value="item.id" :key="index">{{item.name}}</Option>
@@ -59,10 +64,12 @@
         token: '',
         id: this.$route.params.id,
         detail: null,
+        menuList:[],
         categoryList: [],
         formValidate: {
           title: '',
           author: '',
+          menu_id: "",
           category_id: '',
           cover: '',
           content: ''
@@ -87,11 +94,13 @@
       this._getArticle();
       this._getCategoryList();
       this._getUploadToken();
+      this._getMenuList();
     },
     methods: {
       ...mapActions({
         getArticle: 'article/getArticle',
         updateArticle: 'article/updateArticle',
+        getMenuList: "menu/getMenuList",
         getCategoryList: 'category/getCategoryList'
       }),
       // 上传图片成功
@@ -114,6 +123,11 @@
         } catch (e) {
           console.log(e)
         }
+      },
+      // 获取菜单列表
+      async _getMenuList() {
+        const res = await this.getMenuList();
+        this.menuList = res.data.data;
       },
       // 获取文章列表
       async _getArticle() {
