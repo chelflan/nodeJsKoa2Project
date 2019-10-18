@@ -23,6 +23,13 @@ export default new Router({
       }
     },
     {
+      // 文章
+      path: '/test',
+      component(resolve) {
+        require(['../views/article/list.vue'], resolve);
+      }
+    },
+    {
       // 文章详情
       path: '/article/detail/:id',
       component(resolve) {

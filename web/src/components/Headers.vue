@@ -25,11 +25,11 @@
 
       <div class="nav-list">
         <ul class="nav-box">
-          <li :class="navIndex === -1 ? 'nav-item nav-item--active' : 'nav-item'"
+          <li :class="indexNav === -1 ? 'nav-item nav-item--active' : 'nav-item'"
               @click="changeNav(-1,-1)"> 
               <i :class="`icon el-icon-s-home`"></i>首页</li>
           <li v-for="(item, index) in nav"
-              :class="navIndex === index ? 'nav-item nav-item--active' : 'nav-item'"
+              :class="indexNav === index ? 'nav-item nav-item--active' : 'nav-item'"
               @click="changeNav(item.menuId, index)"
               :key="index">
             <i :class="`icon el-icon-menu`"></i> {{item.name}}
@@ -41,14 +41,13 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapActions,mapGetters} from 'vuex'
   import merge from 'webpack-merge'
-
+  import store from '../store/index'
   export default {
     data() {
       return {
         keyword: '',
-        navIndex: -1,
         nav: [
           {name: '首页', path: '/', icon: 'el-icon-house'},
           {name: '文章', path: '/', icon: 'el-icon-house'},
@@ -61,10 +60,12 @@
     created() {
       this.getMenu();
     },
-    mounted() {
-    },
     computed: {
-      ...mapState({})
+      ...mapGetters('header', [
+        'indexNav'
+      ])
+    },
+    mounted() {
     },
     methods: {
       ...mapActions({
@@ -77,15 +78,28 @@
       /**
        * 切换导航栏
        */
+      //    changeNav(path, index) {
+      //   this.$router.replace({
+      //     query: merge({})
+      //   });
+      //   this.navIndex = index;
+      //   this.toPath(path);
+      //   this.getArticle();
+      // },
       changeNav(menuId, index) {
         this.$router.replace({
           query: merge({})
         });
-        this.navIndex = index;
+         
+        debugger
+        // this.navIndex = index;
+        store.dispatch('header/setIndex',index);
         
         if(menuId === -1){
+          this.toPath("/");
           this.getArticleList();
         }else{
+          this.toPath("/");
            this.changeArticleMenu(menuId);
         }
       
