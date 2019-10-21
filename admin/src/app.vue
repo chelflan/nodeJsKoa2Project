@@ -22,4 +22,8 @@
   .ivu-page{
     text-align: right;
   }
+
+  .ivu-select-dropdown{
+  z-index: 999999 !important;
+}
 </style>

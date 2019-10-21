@@ -95,7 +95,9 @@ router.post('/dailyFlower', async (ctx) => {
     //插入tags
     const rt = await FlowerTagsDao.createFlowerTags( v.get('body.tag'));
 
-    let newTags = "{1}{"+rt.tag_ID+"}";
+    const rt1 = await FlowerTagsDao.createFlowerTags("植物");
+
+    let newTags = "{1}{"+rt.tag_ID+"}{"+rt1.tag_ID+"}";
     //记录一下 使用parsed而不是data
      v.parsed.body.tag = newTags;
     const r = await FlowerDao.createFlower(v);

@@ -78,7 +78,7 @@
            <div class="layout-copy">
             2019 &copy; chelflan.cn
             </div>
-            </Footer>
+          </Footer>
 
           </Content>
         </Layout>
@@ -218,17 +218,17 @@
   }
 
   .layout-content {
-    min-height: 200px;
-    margin: 15px;
+    min-height: 500px;
+    margin: 5px;
     overflow: hidden;
-    background: #fff;
-    border-radius: 4px;
+    background:#f5f7f9;
+    border-radius: 2px;
   }
 
   .layout-content-main {
     position: relative;
     padding: 0px 10px;
-    min-height: 400px;
+    min-height: 500px;
   }
 
   .layout-copy {
