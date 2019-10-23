@@ -18,6 +18,7 @@
 <script>
   import merge from 'webpack-merge'
   import {mapState, mapActions} from 'vuex'
+  import store from '../store/index'
 
   export default {
     data() {
@@ -76,7 +77,7 @@
        */
       async getArticle() {
         const {page, desc, category_id} = this.$route.query;
-
+       store.dispatch('header/setIndex',-1);
         await this.getArticleList({
           page,
           desc,

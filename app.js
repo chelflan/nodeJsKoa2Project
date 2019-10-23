@@ -5,7 +5,7 @@ const cors = require('@koa/cors');
 
 const catchError = require('./middlewares/exception')
 
-const app = new Koa()
+var app = new Koa()//实例化框架
 
 app.use(cors())
 app.use(catchError)

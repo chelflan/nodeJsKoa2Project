@@ -102,6 +102,18 @@ export default {
         'Content-Type': 'multipart/form-data'
       }
     })
+  },
+
+  postOne(url, data) {
+    return Util.ajax({
+      method: 'post',
+      url: url,
+      data: data,
+      timeout: 3000,
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+      }
+    })
   }
 
 }

@@ -16,7 +16,7 @@
                 v-for="(item, index) in nav"
                 :key="index"
                 @click.native="changeNav(item.path, index)">
-                <i :class="`icon ${item.icon}`"></i> {{item.name}}
+                <i :class="`icon el-icon-menu`"></i> {{item.name}}
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -25,92 +25,124 @@
 
       <div class="nav-list">
         <ul class="nav-box">
+          <li :class="indexNav === -1 ? 'nav-item nav-item--active' : 'nav-item'"
+              @click="changeNav(-1,-1)"> 
+              <i :class="`icon el-icon-s-home`"></i>首页</li>
           <li v-for="(item, index) in nav"
-              :class="navIndex === index ? 'nav-item nav-item--active' : 'nav-item'"
-              @click="changeNav(item.path, index)"
+              :class="indexNav === index ? 'nav-item nav-item--active' : 'nav-item'"
+              @click="changeNav(item.menuId, index)"
               :key="index">
-            <i :class="`icon ${item.icon}`"></i> {{item.name}}
+            <i :class="`icon el-icon-menu`"></i> {{item.name}}
           </li>
         </ul>
-      </div>
-
-      <div class="search">
-        <el-input
-          placeholder="请输入搜索内容"
-          size="small"
-          clearable
-          maxlength="32"
-          prefix-icon="el-icon-search"
-          @keyup.enter.native="getSearchArticle"
-          v-model="keyword">
-        </el-input>
       </div>
     </header>
   </section>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapActions,mapGetters} from 'vuex'
   import merge from 'webpack-merge'
-
+  import store from '../store/index'
   export default {
     data() {
       return {
         keyword: '',
-        navIndex: 0,
         nav: [
+          {name: '首页', path: '/', icon: 'el-icon-house'},
           {name: '文章', path: '/', icon: 'el-icon-house'},
-          // {name: '专栏', path: '/book', icon: 'el-icon-reading\n'},
+          {name: '免费观影', path: '/', icon: 'el-icon-reading'},
+          {name: '股票', path: '/', icon: 'el-icon-reading'},
           {name: '关于', path: '/about', icon: 'el-icon-chat-round'},
         ]
       }
     },
-    mounted() {
+    created() {
+      this.getMenu();
     },
     computed: {
-      ...mapState({})
+      ...mapGetters('header', [
+        'indexNav'
+      ])
+    },
+    mounted() {
     },
     methods: {
       ...mapActions({
-        searchArticle: 'article/searchArticle',
         showUserManager: 'user/showUserManager',
-        getArticleList: 'article/getArticleList'
+        getArticleList: 'article/getArticleList',
+        getMenuList: 'menu/getMenuList',
+        getMenuArticle: 'menu/getMenuArticle',
       }),
 
       /**
        * 切换导航栏
        */
-      changeNav(path, index) {
+      //    changeNav(path, index) {
+      //   this.$router.replace({
+      //     query: merge({})
+      //   });
+      //   this.navIndex = index;
+      //   this.toPath(path);
+      //   this.getArticle();
+      // },
+      changeNav(menuId, index) {
         this.$router.replace({
           query: merge({})
         });
-        this.navIndex = index;
-        this.toPath(path);
-        this.getArticle();
+         
+        debugger
+        // this.navIndex = index;
+        store.dispatch('header/setIndex',index);
+        
+        if(menuId === -1){
+          this.toPath("/");
+          this.getArticleList();
+        }else{
+          this.toPath("/");
+           this.changeArticleMenu(menuId);
+        }
+      
       },
+      
+       /**
+       * 获取菜单
+       * @returns 菜单列表
+       */
+      async getMenu() {
+        const res = await this.getMenuList();
+        let temp = res.data.data;
+         this.nav = [];
+        for(let item of temp){
+          this.nav.push(
+            {
+               name: item.name,
+               menuId: item.id
+            }
+          )
+        }
+        
+      },
+
       /**
-       * 搜索文章
+       * 获取菜单下的文章
+       * @param menu_id 菜单ID
        * @returns 文章列表
        */
-      async getSearchArticle() {
-        const keyword = this.keyword;
-        if (!keyword) return false;
-
-        const path = this.$route.path;
-        let articlePath = '/';
-
-        if (path !== articlePath) {
-          articlePath += `?keyword=${keyword}`;
-          this.toPath(articlePath)
-
-        } else {
-          this.$router.replace({
-            query: merge(this.$route.query, {
-              keyword
-            })
-          });
-          this.getArticle();
-        }
+      async changeArticleMenu(menu_id) {
+        this.$router.replace({
+          query: merge({}, {
+            menu_id
+          })
+        });
+        this.getArticle();
+      },
+       // 全部文章
+      allArticle() {
+        this.$router.replace({
+          query: merge({})
+        });
+        this.getArticle();
       },
       /**
        * 获取文章
@@ -118,13 +150,13 @@
        * @returns 文章列表
        */
       async getArticle() {
-        const {page, desc, category_id, keyword} = this.$route.query;
+        const {page, desc, menu_id, keyword} = this.$route.query;
 
         await this.getArticleList({
           page,
           desc,
           keyword,
-          category_id
+          menu_id
         });
       },
       /**

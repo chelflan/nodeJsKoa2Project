@@ -33,14 +33,14 @@ class ArticleDao {
         article.cover = v.get('body.cover');
         article.browse = v.get('body.browse');
         article.category_id = v.get('body.category_id');
+        article.menu_id = v.get('body.menu_id');
 
         article.save();
     }
 
     // 获取文章列表
-    static async getArticleList(page = 1, desc = 'created_at', category_id, keyword) {
+    static async getArticleList(page = 1, desc = 'created_at', category_id,menu_id,keyword) {
         const pageSize = 10;
-
         // 筛选方式
         let filter = {
             deleted_at: null
@@ -49,6 +49,11 @@ class ArticleDao {
         // 筛选方式：存在分类ID
         if (category_id) {
             filter.category_id = category_id;
+        }
+
+        // 筛选方式：存在分类ID
+        if (menu_id) {
+            filter.menu_id = menu_id;
         }
 
         // 筛选方式：存在搜索关键字
@@ -67,11 +72,13 @@ class ArticleDao {
         });
 
         const categoryIds = [];
+        const menuIds = [];
         const articleIds = [];
 
         const r = article.rows;
         r.forEach(article => {
             articleIds.push(article.id);
+            menuIds.push(article.menu_id);
             categoryIds.push(article.category_id);
         });
 
@@ -149,6 +156,17 @@ class ArticleDao {
         return article
     }
 
+     // 设置每章文章菜单详情
+     static _setArticleMenuDetail(article, menu) {
+        menu.forEach(item => {
+            if (parseInt(article.menu_id) === parseInt(item.id)) {
+                article.setDataValue('menu_detail', item);
+            }
+        })
+
+        return article
+    }
+
 
     // 删除文章
     static async destroyArticle(id) {
@@ -184,6 +202,7 @@ class ArticleDao {
         article.cover = v.get('body.cover');
         article.browse = v.get('body.browse');
         article.category_id = v.get('body.category_id');
+        article.menu_id = v.get('body.menu_id');
 
         article.save();
     }

@@ -28,6 +28,8 @@
     name: "list",
     data() {
       return {
+        menuList:[],
+        categoryList: [],
         list: [],
         page: {},
         currentPage: 1,
@@ -58,7 +60,37 @@
             title: '分类ID',
             width: 100,
             align: 'center',
-            key: 'category_id'
+            key: 'category_id',
+            render: (h, params) => {
+              let cate = "";
+              for (let item of this.categoryList) {
+                if(item.id == params.row.category_id){
+                  cate = item.name;
+                  break;
+                }
+              }
+              return h('div', [
+                h('i', cate)
+              ]);
+            }
+          },
+          {
+            title: '菜单ID',
+            width: 100,
+            align: 'center',
+            key: 'menu_id',
+            render: (h, params) => {
+              let cate = "";
+              for (let item of this.menuList) {
+                if(item.id == params.row.menu_id){
+                  cate = item.name;
+                  break;
+                }
+              }
+              return h('div', [
+                h('div', cate)
+              ]);
+            }
           },
           {
             title: '创建时间',
@@ -76,12 +108,16 @@
       }
     },
     created() {
+      this._getCategoryList();
+      this._getMenuList();
       this._getArticleList();
     },
     methods: {
       ...mapActions({
         getArticleList: 'article/getArticleList',
-        destroyArticle: 'article/destroyArticle'
+        destroyArticle: 'article/destroyArticle',
+        getCategoryList: "category/getCategoryList",
+        getMenuList: "menu/getMenuList",
       }),
       // 获取文章
       async _getArticleList() {
@@ -93,6 +129,16 @@
 
         this.list = res.data.data.data;
         this.page = res.data.data.meta;
+      },
+      // 获取分类列表
+      async _getCategoryList() {
+        const res = await this.getCategoryList();
+        this.categoryList = res.data.data;
+      },
+      // 获取菜单列表
+      async _getMenuList() {
+        const res = await this.getMenuList();
+        this.menuList = res.data.data;
       },
       // 切换分页
       handlePage(page) {

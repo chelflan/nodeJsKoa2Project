@@ -1,33 +1,26 @@
 const moment = require('moment');
+
 const {sequelize} = require('../../core/db')
 const {Sequelize, Model} = require('sequelize')
 
 // 定义文章模型
-class Article extends Model {
+class Menu extends Model {
 
 }
 
-// 初始文章模型
-Article.init({
+// 初始菜单模型
+Menu.init({
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    // 文章标题
-    title: Sequelize.STRING,
-    // 文章作者
-    author: Sequelize.STRING(64),
-    // 文章内容
-    content: Sequelize.TEXT,
-    // 文章封面
-    cover: Sequelize.STRING,
-    // 文章所属菜单ID
-    menu_id: Sequelize.STRING,
-    // 文章分类ID
-    category_id: Sequelize.STRING,
-    // 文章浏览次数
-    browse: {
+    // 菜单名
+    name: Sequelize.STRING,
+    // 菜单键
+    key: Sequelize.STRING,
+    // 菜单父级ID，默认为0
+    parent_id: {
         type: Sequelize.INTEGER,
         defaultValue: 0
     },
@@ -38,10 +31,10 @@ Article.init({
         }
     }
 }, {
-    sequelize: sequelize,
-    tableName: 'article'
+    sequelize,
+    tableName: 'menu'
 })
 
 module.exports = {
-    Article
+    Menu
 }

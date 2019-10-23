@@ -6,7 +6,9 @@ import admin from './modules/admin'
 import category from './modules/category'
 import comments from './modules/comments'
 import article from './modules/article'
+import menu from './modules/menu'
 import upload from './modules/upload'
+import flower from './modules/flower'
 
 Vue.use(Vuex);
 
@@ -55,6 +57,8 @@ export default new Vuex.Store({
     article,
     comments,
     category,
-    upload
+    menu,
+    upload,
+    flower
   },
 });

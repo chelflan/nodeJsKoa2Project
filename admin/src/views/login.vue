@@ -95,7 +95,7 @@
             </FormItem>
 
             <FormItem>
-              <Button :loading="buttonLoading" @click="registerUser" type="primary" long>注册</Button>
+              <Button @click="registerUser" type="primary" long>注册</Button>
             </FormItem>
           </Form>
         </div>

@@ -1,11 +1,11 @@
 const Router = require('koa-router');
 
 const {
-    CategoryValidator,
+    MenuValidator,
     PositiveIdParamsValidator
-} = require('../../validators/category');
+} = require('../../validators/menu');
 
-const {CategoryDao} = require('../../dao/category');
+const {MenuDao} = require('../../dao/menu');
 const {Auth} = require('../../../middlewares/auth');
 
 const {Resolve} = require('../../lib/helper');
@@ -18,65 +18,65 @@ const router = new Router({
 })
 
 /**
- * 创建分类
+ * 创建菜单
  */
-router.post('/category', new Auth(AUTH_ADMIN).m, async (ctx) => {
+router.post('/menu', new Auth(AUTH_ADMIN).m, async (ctx) => {
 
     // 通过验证器校验参数是否通过
-    const v = await new CategoryValidator().validate(ctx);
+    const v = await new MenuValidator().validate(ctx);
 
 
-    await CategoryDao.createCategory(v);
+    await MenuDao.createMenu(v);
 
     // 返回结果
     ctx.response.status = 200;
-    ctx.body = res.success('创建分类成功')
+    ctx.body = res.success('创建菜单成功')
 })
 
 
 /**
  * 删除文章
  */
-router.delete('/category/:id', new Auth(AUTH_ADMIN).m, async (ctx) => {
+router.delete('/menu/:id', new Auth(AUTH_ADMIN).m, async (ctx) => {
 
     // 通过验证器校验参数是否通过
     const v = await new PositiveIdParamsValidator().validate(ctx);
 
-    // 获取分类ID参数
+    // 获取菜单ID参数
     const id = v.get('path.id');
-    // 删除分类
-    await CategoryDao.destroyCategory(id);
+    // 删除菜单
+    await MenuDao.destroyMenu(id);
 
     ctx.response.status = 200;
-    ctx.body = res.success('删除分类成功');
+    ctx.body = res.success('删除菜单成功');
 })
 
 
 /**
- * 更新分类
+ * 更新菜单
  */
-router.put('/category/:id', new Auth(AUTH_ADMIN).m, async (ctx) => {
+router.put('/menu/:id', new Auth(AUTH_ADMIN).m, async (ctx) => {
 
     // 通过验证器校验参数是否通过
     const v = await new PositiveIdParamsValidator().validate(ctx);
 
-    // 获取分类ID参数
+    // 获取菜单ID参数
     const id = v.get('path.id');
-    // 更新分类
-    await CategoryDao.updateCategory(id, v);
+    // 更新菜单
+    await MenuDao.updateMenu(id, v);
 
     // 返回结果
     ctx.response.status = 200;
-    ctx.body = res.success('更新分类成功');
+    ctx.body = res.success('更新菜单成功');
 })
 
 /**
- * 获取所有的分类
+ * 获取所有的菜单
  */
-router.get('/category', async (ctx) => {
+router.get('/menu', async (ctx) => {
 
-    // 获取分类下关联的文章
-    const categoryList = await CategoryDao.getCategoryList();
+    // 获取菜单下关联的文章
+    const categoryList = await MenuDao.getMenuList();
 
     // 返回结果
     ctx.response.status = 200;
@@ -84,43 +84,43 @@ router.get('/category', async (ctx) => {
 })
 
 /**
- * 获取分类详情
+ * 获取菜单详情
  */
-router.get('/category/:id', async (ctx) => {
+router.get('/menu/:id', async (ctx) => {
 
     // 通过验证器校验参数是否通过
     const v = await new PositiveIdParamsValidator().validate(ctx);
 
     // 获取参数
     const id = v.get('path.id');
-    // 获取分类
-    const category = await CategoryDao.getCategory(id);
+    // 获取菜单
+    const menu = await MenuDao.getMenu(id);
 
     // 返回结果
     ctx.response.status = 200;
-    ctx.body = res.json(category);
+    ctx.body = res.json(menu);
 })
 
 /**
- * 获取一个分类下的文章
+ * 获取一个菜单下的文章
  */
-router.get('/category/:id/article', async (ctx) => {
+router.get('/menu/:id/article', async (ctx) => {
 
     // 通过验证器校验参数是否通过
     const v = await new PositiveIdParamsValidator().validate(ctx);
 
-    // 分类ID
+    // 菜单ID
     const category_id = v.get('path.id');
     // 页面
     const page = v.get('query.page');
     // 排序
     const desc = v.get('query.desc');
-    // 获取分类
-    const category = await CategoryDao.getCategoryArticle(category_id, page, desc);
+    // 获取菜单
+    const menu = await MenuDao.getMenuArticle(category_id, page, desc);
 
     // 返回结果
     ctx.response.status = 200;
-    ctx.body = res.json(category);
+    ctx.body = res.json(menu);
 })
 
 module.exports = router

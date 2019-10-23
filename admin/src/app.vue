@@ -18,4 +18,12 @@
     color: #2c3e50;
     height: 100%;
   }
+
+  .ivu-page{
+    text-align: right;
+  }
+
+  .ivu-select-dropdown{
+  z-index: 999999 !important;
+}
 </style>
