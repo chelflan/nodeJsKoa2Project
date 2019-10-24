@@ -29,11 +29,11 @@ router.post('/article', new Auth(AUTH_ADMIN).m, async (ctx) => {
     const v = await new ArticleValidator().validate(ctx);
 
     // 创建文章
-    await ArticleDao.createArticle(v);
+  const msg = await ArticleDao.createArticle(v);
 
     // 返回结果
     ctx.response.status = 200;
-    ctx.body = res.success('创建文章成功');
+    ctx.body = res.success(msg);
 });
 
 /**
