@@ -63,7 +63,7 @@
         <mavon-editor
           style="min-height: 500px;width: 100%"
           :toolbars="toolbars"
-          v-model="formValidate.content"
+          v-model="editContent"
           :ishljs="true"
           ref="md"
           @imgAdd="$imgAdd"
@@ -121,6 +121,7 @@ export default {
       detail: null,
       menuList: [],
       categoryList: [],
+      editContent:"",
       formValidate: {
         title: "",
         author: "",
@@ -182,6 +183,16 @@ export default {
     this._getMenuList();
     this._getUploadToken();
   },
+  watch: {
+    editContent: {
+      handler(newVal, oldVal) {
+        this.formValidate.content = newVal;
+        this.autoSave(true);
+      },
+  // 代表在wacth里声明了editContent这个属性之后立即先去执行handler方法
+      immediate: false
+    }
+  },
   methods: {
     ...mapActions({
       createArticle: "article/createArticle",
@@ -189,6 +200,9 @@ export default {
       getMenuList: "menu/getMenuList",
       uploadImg: "upload/uploadImg"
     }),
+    autoSave(val){
+      this._createArticle(val);
+    },
     uploadLoadStart(text = "....努力上传中....耐心等候.....") {
       this.$Spin.show({
         render: h => {
@@ -258,17 +272,22 @@ export default {
       this.menuList = res.data.data;
     },
     // 更新
-    async _createArticle() {
+    async _createArticle(val) {
       this.formValidate.id = this.id;
 
       try {
         await this.createArticle(this.formValidate);
-        this.$Message.success("新增成功!");
-        this.$router.push("/article");
+        if(!!!val){
+          this.$Message.success("新增成功!");
+          this.$router.push("/article");
+        }
       } catch (e) {}
     },
     // 提交
     handleSubmit(name) {
+      if(!!!this.formValidate.cover){
+        this.formValidate.cover = "http://upload.chelflan.cn/Fgq0YNapGYOXRcXq59i6HH4W37Sn";
+      }
       this.$refs[name].validate(valid => {
         if (valid) {
           this._createArticle();
@@ -280,6 +299,12 @@ export default {
     handleReset(name) {
       this.$refs[name].resetFields();
     }
+  },
+  beforeDestroy(){
+    //销毁钱自动保存
+    // if(!!!this.formValidate.content){
+    //   this.autoSave(true);
+    // }
   }
 };
 </script>

@@ -114,7 +114,7 @@
       <FormItem label prop="content" :label-width="0">
         <mavon-editor
           style="min-height: 500px;width: 100%"
-          v-model="formValidate.content"
+          v-model="editContent"
           :ishljs="true"
           ref="md"
           @imgAdd="$imgAdd"
@@ -137,6 +137,7 @@ export default {
       detail: null,
       menuList: [],
       categoryList: [],
+      editContent:"",
       formValidate: {
         title: "",
         author: "",
@@ -166,6 +167,16 @@ export default {
     this._getCategoryList();
     this._getUploadToken();
     this._getMenuList();
+  },
+  watch: {
+    editContent: {
+      handler(newVal, oldVal) {
+        this.formValidate.content = newVal;
+        this._updateArticle(true);
+      },
+      // 代表在wacth里声明了editContent这个属性之后立即先去执行handler方法
+      immediate: false
+    }
   },
   methods: {
     ...mapActions({
@@ -234,7 +245,7 @@ export default {
       const res = await this.getMenuList();
       this.menuList = res.data.data;
     },
-    // 获取文章列表
+    // 获取文章内容
     async _getArticle() {
       try {
         const res = await this.getArticle({
@@ -248,6 +259,7 @@ export default {
         this.formValidate.menu_id = parseInt(article.menu_id);
         this.formValidate.cover = article.cover;
         this.formValidate.content = article.content;
+        this.editContent = article.content;
       } catch (e) {}
     },
     // 获取分类列表
@@ -256,13 +268,15 @@ export default {
       this.categoryList = res.data.data;
     },
     // 更新
-    async _updateArticle() {
+    async _updateArticle(isAuto) {
       this.formValidate.id = this.id;
 
       try {
         await this.updateArticle(this.formValidate);
-        this.$Message.success("更新成功!");
-        this.$router.push("/article");
+        if(!!!isAuto){
+          this.$Message.success("更新成功!");
+          this.$router.push("/article");
+        }
       } catch (e) {}
     },
     // 提交

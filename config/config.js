@@ -16,8 +16,8 @@ module.exports = {
     },
     security: {
         secretKey: "secretKey",
-        // 过期时间 1小时
-        expiresIn: 60 * 60
+        // 过期时间 秒
+        expiresIn: 60 * 600
     },
     wx: {
         appId: 'wx749c0f4834e01f04',

@@ -19,23 +19,37 @@ class ArticleDao {
             }
         });
 
-        // 如果存在，抛出存在信息
+        let msg = "创建成功!";
+
+        // 如果存在，更新操作
         if (hasArticle) {
-            throw new global.errs.Existing('文章已存在');
+            // throw new global.errs.Existing('文章已存在');
+            hasArticle.title = v.get('body.title');
+            hasArticle.author = v.get('body.author');
+            hasArticle.content = v.get('body.content');
+            hasArticle.cover = v.get('body.cover');
+            hasArticle.browse = v.get('body.browse');
+            hasArticle.category_id = v.get('body.category_id');
+            hasArticle.menu_id = v.get('body.menu_id');
+            hasArticle.save();
+            msg = "更新成功";
+        }else {
+            // 创建文章
+            const article = new Article();
+
+            article.title = v.get('body.title');
+            article.author = v.get('body.author');
+            article.content = v.get('body.content');
+            article.cover = v.get('body.cover');
+            article.browse = v.get('body.browse');
+            article.category_id = v.get('body.category_id');
+            article.menu_id = v.get('body.menu_id');
+            article.save();
         }
 
-        // 创建文章
-        const article = new Article();
-
-        article.title = v.get('body.title');
-        article.author = v.get('body.author');
-        article.content = v.get('body.content');
-        article.cover = v.get('body.cover');
-        article.browse = v.get('body.browse');
-        article.category_id = v.get('body.category_id');
-        article.menu_id = v.get('body.menu_id');
-
-        article.save();
+        return {
+            msg : msg
+        };
     }
 
     // 获取文章列表
