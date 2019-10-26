@@ -4,6 +4,7 @@ const {
 } = require('../../core/lin-validator-v2')
 
 const {Category} = require('../models/category')
+const {Menu} = require('../models/menu')
 
 class ArticleValidator extends LinValidator {
     constructor() {
@@ -14,6 +15,7 @@ class ArticleValidator extends LinValidator {
         this.cover = [new Rule("isLength", "cover不能为空", {min: 1})];
         this.content = [new Rule("isLength", "content不能为空", {min: 1})];
         this.category_id = [new Rule("isLength", "category_id不能为空", {min: 1})];
+        this.menu_id = [new Rule("isLength", "menu_id不能为空", {min: 1})];
     }
 
     async validateCategoryId(vals) {
@@ -27,6 +29,20 @@ class ArticleValidator extends LinValidator {
 
         if (!category) {
             throw new Error('暂无此分类ID')
+        }
+    }
+
+    async validateMenuId(vals) {
+        const MenuId = vals.body.menu_id;
+
+        const menu = await Menu.findOne({
+            where: {
+                id: MenuId
+            }
+        });
+
+        if (!menu) {
+            throw new Error('暂无此菜单ID')
         }
     }
 }

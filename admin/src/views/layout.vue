@@ -2,7 +2,9 @@
   <div class="layout">
     <Layout>
       <Sider ref="side1" hide-trigger collapsible :collapsed-width="80" v-model="isCollapsed" style="overflow-y: auto">
-        <div class="layout-logo-left" :style="isCollapsed ? 'font-size:12px': ''">boblog.com</div>
+        <div class="layout-logo-left" :style="isCollapsed ? 'font-size:15px': ''">
+          <a href="http://www.chelflan.cn" target="view_window">chelflan.cn</a>
+        </div>
         <Menu
           :accordion="true"
           width="auto"
@@ -71,21 +73,25 @@
                 v-if="!$route.meta.keep || ($route.meta.keep instanceof Array && $route.meta.keep.length === 0)"/>
             </div>
           </div>
-          <div class="layout-copy">
-            2019 &copy; boblog.com
-          </div>
-        </Content>
+
+          <Footer>
+           <div class="layout-copy">
+            2019 &copy; chelflan.cn
+            </div>
+          </Footer>
+
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
-    <Modal v-model="pictureModal.modal" width="800" title="Image">
-      <img :src="pictureModal.picture" alt="" style="width: 100%;">
-    </Modal>
-  </div>
-</template>
-<script>
-  import {mapState, mapActions, mapMutations} from 'vuex'
-  import {menus} from './menus'
-  import Vue from 'vue'
+      <Modal v-model="pictureModal.modal" width="800" title="Image">
+        <img :src="pictureModal.picture" alt="" style="width: 100%;">
+      </Modal>
+    </div>
+  </template>
+  <script>
+    import {mapState, mapActions, mapMutations} from 'vuex'
+    import {menus} from './menus'
+    import Vue from 'vue'
 
   export default {
     components: {},
@@ -212,17 +218,17 @@
   }
 
   .layout-content {
-    min-height: 200px;
-    margin: 15px;
+    min-height: 500px;
+    margin: 5px;
     overflow: hidden;
-    background: #fff;
-    border-radius: 4px;
+    background:#f5f7f9;
+    border-radius: 2px;
   }
 
   .layout-content-main {
     position: relative;
     padding: 0px 10px;
-    min-height: 400px;
+    min-height: 500px;
   }
 
   .layout-copy {

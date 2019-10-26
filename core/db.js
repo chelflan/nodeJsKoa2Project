@@ -8,6 +8,14 @@ const {
     password
 } = require('../config/config').database
 
+const {
+    dbNameFlower,
+    hostFlower,
+    portFlower,
+    userFlower,
+    passwordFlower
+} = require('../config/config').databaseDailyFlower
+
 const sequelize = new Sequelize(dbName, user, password, {
     dialect: 'mysql',
     host,
@@ -39,13 +47,29 @@ const sequelize = new Sequelize(dbName, user, password, {
     }
 })
 
+const sequelizeFlower = new Sequelize(dbNameFlower, userFlower, passwordFlower, {
+    dialect: 'mysql',
+    host:hostFlower,
+    port:portFlower,
+    logging: true,
+    timezone: '+08:00',
+    define: {
+        createdAt: false,
+        updatedAt: false,
+        deletedAt: false,
+    }
+})
+
 // 创建模型
 sequelize.sync({
     force: false
 })
 
-module.exports = {
-    sequelize
-}
+sequelizeFlower.sync({
+    force: false
+})
 
-// 数据迁移 SQL 更新
+module.exports = {
+    sequelize,
+    sequelizeFlower
+}

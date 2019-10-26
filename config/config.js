@@ -1,20 +1,27 @@
 module.exports = {
     environment: 'dev',
     database: {
-        dbName: 'boblog',
-        host: '172.20.11.242',
-        port: 3306,
-        user: 'root',
-        password: '111111'
+        dbName: 'myblog',
+        host: '139.155.24.81',
+        port: 3380,
+        user: 'user',
+        password: 'user'
+    },
+    databaseDailyFlower: {
+        dbNameFlower: 'dailyflower',
+        hostFlower: '139.155.24.81',
+        portFlower: 3380,
+        userFlower: 'user',
+        passwordFlower: 'user'
     },
     security: {
         secretKey: "secretKey",
-        // 过期时间 1小时
-        expiresIn: 60 * 60
+        // 过期时间 秒
+        expiresIn: 60 * 600
     },
     wx: {
-        appId: '',
-        appSecret: '',
+        appId: 'wx749c0f4834e01f04',
+        appSecret: '0b21812492834f37d14d8676fb39434b',
         loginUrl: 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code'
     }
 }

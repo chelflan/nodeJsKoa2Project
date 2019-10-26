@@ -29,11 +29,11 @@ router.post('/article', new Auth(AUTH_ADMIN).m, async (ctx) => {
     const v = await new ArticleValidator().validate(ctx);
 
     // 创建文章
-    await ArticleDao.createArticle(v);
+  const msg = await ArticleDao.createArticle(v);
 
     // 返回结果
     ctx.response.status = 200;
-    ctx.body = res.success('创建文章成功');
+    ctx.body = res.success(msg);
 });
 
 /**
@@ -75,10 +75,10 @@ router.put('/article/:id', new Auth(AUTH_ADMIN).m, async (ctx) => {
  * 获取文章列表
  */
 router.get('/article', async (ctx) => {
-    // 获取页码，排序方法，分类ID，搜索关键字
-    const {page, desc, category_id, keyword} = ctx.query;
+    // 获取页码，排序方法，分类ID，菜单ID,搜索关键字
+    const {page, desc, category_id,menu_id,keyword} = ctx.query;
     // 查询文章列表
-    const articleList = await ArticleDao.getArticleList(page, desc, category_id, keyword);
+    const articleList = await ArticleDao.getArticleList(page, desc, category_id,menu_id,keyword);
 
     // 返回结果
     ctx.response.status = 200;

@@ -52,6 +52,7 @@
     </article>
 
     <div class="sidebar">
+      <v-search/>
       <v-category/>
       <v-links/>
     </div>
@@ -59,7 +60,7 @@
 </template>
 <script>
   import VCategory from '../../components/Category'
-
+  import VSearch from '../../components/Search'
   import VLinks from '../../components/Links'
   import {mapState, mapActions} from 'vuex'
   import merge from 'webpack-merge'
@@ -67,7 +68,8 @@
   export default {
     components: {
       VCategory,
-      VLinks
+      VLinks,
+      VSearch
     },
     data() {
       return {
@@ -89,7 +91,7 @@
     created() {
       // 获取文章
       this.getArticle();
-      document.title = `波博客 - boblog.com`
+      document.title = `赤f蓝 - chelflan.cn`
     },
     methods: {
       ...mapActions({
@@ -280,7 +282,7 @@
 
   .page {
     padding: 32px 0;
-    text-align: center;
+    text-align: left;
   }
 
   @media screen and (min-width: 200px) and (max-width: 768px) {

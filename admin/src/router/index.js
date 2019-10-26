@@ -17,7 +17,7 @@ const routers = [
         //todo: 首页
         path: '/',
         name: 'index',
-        meta: {module: "/", title: '首页'},
+        meta: {module: "/", group: "index",title: '首页'},
         component(resolve) {
           require(['../views/index.vue'], resolve);
         }
@@ -51,6 +51,25 @@ const routers = [
         meta: {edit: true, module: "/category", group: "category", title: '分类 - 更新'},
         component: (resolve) => require(['../views/category/update.vue'], resolve),
       },
+      //todo: 菜单管理
+      {
+        path: 'menu',
+        name: 'menu',
+        meta: {module: "/menu", group: "menu", title: '菜单 - 列表'},
+        component: (resolve) => require(['../views/menu/list.vue'], resolve),
+      },
+      {
+        path: 'menu/create',
+        name: 'menu/create',
+        meta: {module: "/menu/create", group: "menu", title: '菜单 - 创建'},
+        component: (resolve) => require(['../views/menu/create.vue'], resolve),
+      },
+      {
+        path: 'menu/update/:id',
+        name: 'menu/update',
+        meta: {edit: true, module: "/menu", group: "menu", title: '菜单 - 更新'},
+        component: (resolve) => require(['../views/menu/update.vue'], resolve),
+      },
       //todo: 文章管理
       {
         path: 'article',
@@ -76,6 +95,13 @@ const routers = [
         name: 'comments',
         meta: {module: "/comments", group: "comments", title: '评论 - 列表'},
         component: (resolve) => require(['../views/comments/list.vue'], resolve),
+      },
+      //todo: 每日一花
+      {
+        path: 'flower',
+        name: 'flower',
+        meta: {module: "/flower", group: "flower", title: '每日一花 - 自动更新'},
+        component: (resolve) => require(['../views/flower/flower.vue'], resolve),
       },
       {
         //todo: 404

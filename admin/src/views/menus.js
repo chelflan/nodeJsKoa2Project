@@ -7,8 +7,15 @@
 const menus = [
     {
       name: "首页",
-      path: "/",
-      icon: "ios-navigate"
+      path: "index",
+      icon: "ios-navigate",
+      children: [
+        {
+          icon: "md-home",
+          name: "数据展示",
+          path: "/"
+        }
+      ]
     },
     // 系统管理
     {
@@ -41,6 +48,23 @@ const menus = [
       ]
     },
     {
+      name: "菜单管理",
+      path: "menu",
+      icon: "md-menu",
+      children: [
+        {
+          name: "菜单列表",
+          path: "/menu",
+          icon: "md-list"
+        },
+        {
+          name: "菜单创建",
+          path: "/menu/create",
+          icon: "md-add-circle"
+        }
+      ]
+    },
+    {
       name: "文章管理",
       path: "article",
       icon: "md-list-box",
@@ -66,6 +90,18 @@ const menus = [
           name: "评论列表",
           path: "/comments",
           icon: "md-list"
+        }
+      ]
+    },
+    {
+      name: "每日一花",
+      path: "flower",
+      icon: "md-flower",
+      children: [
+        {
+          name: "自动更新",
+          path: "/flower",
+          icon: "md-clock"
         }
       ]
     }

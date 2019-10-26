@@ -89,7 +89,33 @@ export default {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }
     })
+  },
+
+  upload(url, formData) {
+    debugger
+    return Util.ajax({
+      method: 'post',
+      url: url,
+      data: formData,
+      timeout: 150000,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  },
+
+  postOne(url, data) {
+    return Util.ajax({
+      method: 'post',
+      url: url,
+      data: data,
+      timeout: 3000,
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+      }
+    })
   }
+
 }
 
 // 转码token

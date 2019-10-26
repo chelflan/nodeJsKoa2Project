@@ -10,7 +10,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.18.0",
+    "echarts": "^4.2.1",
     "element-ui": "^2.8.2",
     "lib-flexible": "^0.3.2",
     "mavon-editor": "^2.7.5",
@@ -23,7 +24,8 @@
     "vue-lazyload": "^1.2.6",
     "vue-ls": "^3.2.1",
     "vue-router": "^3.0.6",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "xlsx": "^0.15.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -59,7 +61,7 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^3.6.0",
-    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-server": "^2.11.5",
     "webpack-merge": "^4.2.1"
   },
