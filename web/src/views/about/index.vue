@@ -26,7 +26,7 @@
 
       <div class="intro">
         <div class="container text-center">
-          <img class="profile-image" src="assets/images/profile-image.png" alt="">
+          <img class="profile-image" src="./assets/images/profile-image.png" alt="">
           <h1 class="name">{{basicInfo.name}}</h1>
           <div class="title">{{basicInfo.title}}</div>
           <div class="profile">
@@ -270,10 +270,17 @@
 
   </div>
 </template>
-
-import
-
 <script>
+  // import "./assets/plugins/jquery-1.12.4.min.js";
+  // import "./assets/plugins/bootstrap/js/bootstrap.min.js";
+  // import "./assets/plugins/back-to-top.js";
+  // import "./assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js";
+  // import "./assets/plugins/easy-pie-chart/dist/jquery.easypiechart.min.js";
+  // import "./assets/plugins/imagesloaded.pkgd.min.js";
+  // import "./assets/plugins/isotope.pkgd.min.js";
+  // import "./assets/js/main.js";
+  // import "./assets/js/demo/style-switcher.js";
+
   export default {
     name: 'resume',
     data(){
