@@ -26,13 +26,22 @@
       <div class="nav-list">
         <ul class="nav-box">
           <li :class="indexNav === -1 ? 'nav-item nav-item--active' : 'nav-item'"
-              @click="changeNav(-1,-1)"> 
-              <i :class="`icon el-icon-s-home`"></i>首页</li>
+              @click="changeNav(-1,-1)">
+              <i :class="`icon el-icon-s-home`"></i>首页
+          </li>
           <li v-for="(item, index) in nav"
               :class="indexNav === index ? 'nav-item nav-item--active' : 'nav-item'"
               @click="changeNav(item.menuId, index)"
               :key="index">
             <i :class="`icon el-icon-menu`"></i> {{item.name}}
+          </li>
+          <li :class="indexNav === -2 ? 'nav-item nav-item--active' : 'nav-item'"
+              @click="changeNav(-2,-2)">
+            <i :class="`icon el-icon-s-home`"></i>简历
+          </li>
+          <li :class="indexNav === -3 ? 'nav-item nav-item--active' : 'nav-item'"
+              @click="changeNav(-3,-3)">
+            <i :class="`icon el-icon-s-home`"></i>简历2
           </li>
         </ul>
       </div>
@@ -87,14 +96,27 @@
       //   this.getArticle();
       // },
       changeNav(menuId, index) {
+
+        if(index == -2){
+          store.dispatch('header/setIndex',index);
+          this.toPath("/about");
+          return;
+        }
+
+        if(index == -3){
+          store.dispatch('header/setIndex',index);
+          this.toPath("/resume");
+          return;
+        }
+
         this.$router.replace({
           query: merge({})
         });
-         
+
         debugger
         // this.navIndex = index;
         store.dispatch('header/setIndex',index);
-        
+
         if(menuId === -1){
           this.toPath("/");
           this.getArticleList();
@@ -102,9 +124,9 @@
           this.toPath("/");
            this.changeArticleMenu(menuId);
         }
-      
+
       },
-      
+
        /**
        * 获取菜单
        * @returns 菜单列表
@@ -121,7 +143,7 @@
             }
           )
         }
-        
+
       },
 
       /**

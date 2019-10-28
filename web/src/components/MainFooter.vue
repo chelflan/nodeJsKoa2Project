@@ -2,7 +2,7 @@
   <section class="Footer-wrap">
     <footer class="footer-inner">
       <p>www.chelflan.cn - 赤f蓝 Copyright&copy; Author Chelflan</p>
-      <p><a href="http://www.miit.gov.cn" target="_blank">蜀ICP备19027522号-21/a></p>
+      <p><a href="http://www.miit.gov.cn" target="_blank">蜀ICP备19027522号-21></a></p>
     </footer>
   </section>
 </template>
