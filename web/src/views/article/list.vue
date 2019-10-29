@@ -54,7 +54,7 @@
     <div class="sidebar">
       <v-search/>
       <v-category/>
-      <v-links/>
+      <!--<v-links/>-->
     </div>
   </section>
 </template>
@@ -91,7 +91,8 @@
     created() {
       // 获取文章
       this.getArticle();
-      document.title = `赤f蓝 - chelflan.cn`
+      // document.title = `赤f蓝 - chelflan.cn`
+      document.title = ` 生活记录 - chelflan.cn`
     },
     methods: {
       ...mapActions({

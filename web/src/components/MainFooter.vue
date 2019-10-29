@@ -1,8 +1,8 @@
 <template>
   <section class="Footer-wrap">
     <footer class="footer-inner">
-      <p>www.chelflan.cn - 赤f蓝 Copyright&copy; Author Chelflan</p>
-      <p><a href="http://www.miit.gov.cn" target="_blank">蜀ICP备19027522号-21></a></p>
+      <p>Copyright 2019 by chelflan</p>
+      <p><a href="http://www.miit.gov.cn" target="_blank">备案号:蜀ICP备19027522号-1</a></p>
     </footer>
   </section>
 </template>

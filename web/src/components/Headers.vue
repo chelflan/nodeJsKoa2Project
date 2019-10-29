@@ -2,7 +2,7 @@
   <section class="header">
     <header class="header-box">
       <section class="logo">
-        <a href="/"><img src="../assets/images/logoAvatar.png" alt="LOGO"></a>
+        <a href="/"><img src="../assets/images/LOGO.png" alt="LOGO" style="height:100%;"></a>
       </section>
 
       <ul class="nav-dropdown">
@@ -35,14 +35,14 @@
               :key="index">
             <i :class="`icon el-icon-menu`"></i> {{item.name}}
           </li>
-          <li :class="indexNav === -2 ? 'nav-item nav-item--active' : 'nav-item'"
-              @click="changeNav(-2,-2)">
-            <i :class="`icon el-icon-s-home`"></i>简历
-          </li>
-          <li :class="indexNav === -3 ? 'nav-item nav-item--active' : 'nav-item'"
-              @click="changeNav(-3,-3)">
-            <i :class="`icon el-icon-s-home`"></i>简历2
-          </li>
+          <!--<li :class="indexNav === -2 ? 'nav-item nav-item&#45;&#45;active' : 'nav-item'"-->
+              <!--@click="changeNav(-2,-2)">-->
+            <!--<i :class="`icon el-icon-menu`"></i>关于-->
+          <!--</li>-->
+          <!--<li :class="indexNav === -3 ? 'nav-item nav-item&#45;&#45;active' : 'nav-item'"-->
+              <!--@click="changeNav(-3,-3)">-->
+            <!--<i :class="`icon el-icon-s-home`"></i>简历2-->
+          <!--</li>-->
         </ul>
       </div>
     </header>

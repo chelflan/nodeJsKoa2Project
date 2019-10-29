@@ -326,7 +326,8 @@
       this.changeLanguage();
     },
     created() {
-      document.title = `赤f蓝 - chelflan.cn`
+      // document.title = `赤f蓝 - chelflan.cn`
+      document.title = ` 生活记录 - chelflan.cn`
       let dataEn = {
         "basicInfo": {
           "name": "Wang Yuyan ♂ Female",
