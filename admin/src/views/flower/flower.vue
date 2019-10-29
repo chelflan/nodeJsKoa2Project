@@ -194,7 +194,7 @@
           para += "<div style='color: #24be48;'><hr><a style='color: #24be48;text-decoration: underline;font-size: large;padding: 15px;display: inline-block;' target='_blank' href=" + url + ">【查看原文】为了更好的体验,请点击查看原文</a><hr></div>"
           // para += "<div style='text-align: center;margin-right: 30px'><img src=https://img01.store.sogou.com/net/a/04/link?appid=100520029&url="+itemData.thumb_url.replace("http","https")+"></div>"
           para += "<div style='text-align: center;'><img style='display:none;' src='http://upload.chelflan.cn/Fiahr1gGcyN3tXiPDoTup5ZXSlmc' style='width: 300px;'></div>"
-          para += "<div style='text-align: center;font-size: 13px;'><img src='http://upload.chelflan.cn/Fn64eg8NsS_4FgXdQlt_pWAZKzZH' style='width: 300px;'><p style='color: #24be48;'>更多精彩请关注【每日一花 Daily Flower】公众号</p></div>"
+          // para += "<div style='text-align: center;font-size: 13px;'><img src='http://upload.chelflan.cn/Fn64eg8NsS_4FgXdQlt_pWAZKzZH' style='width: 300px;'><p style='color: #24be48;'>更多精彩请关注【每日一花 Daily Flower】公众号</p></div>"
 
           return para;
         }
