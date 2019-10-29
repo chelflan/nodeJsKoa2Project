@@ -98,12 +98,18 @@
           this.insertFlowerSingel(item);
         }
       },
-     async allPatchInsert(){
+      allPatchInsert(){
+        for(let i = 0;i<this.page.total;i+=20){
+            this.everyTwenty(i,20);
+        }
+      },
+     async everyTwenty(offest,count){
           const res = await this.getFlowerList({
             type: 'news',
-            offest: 0,
-            count: this.page.total
+            offest: offest,
+            count: count
           });
+          debugger
           let data = res.data.data.item;
           let flowerList = [];
           for (let item of data) {
@@ -121,8 +127,8 @@
               tag: this.formatTag(item.content.news_item[0].title)
             });
           }
-        for(let item of flowerList){
-          this.insertFlowerSingel(item);
+        for(let i of flowerList){
+          this.insertFlowerSingel(i);
         }
       },
       handleSelectAll (status) {
