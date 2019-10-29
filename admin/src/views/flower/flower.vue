@@ -5,6 +5,7 @@
       <Button @click="handleSelectAll(true)">全选</Button>
       <Button @click="handleSelectAll(false)">全不选</Button>
       <Button @click="patchInsert">批量插入</Button>
+      <Button @click="allPatchInsert">全部插入</Button>
     </Row>
     <Row>
       <Table border :columns="columns" :data="flowerList"  ref="selection" @on-select-all="selectAll" @on-select-all-cancel="cancelAll">
@@ -94,6 +95,33 @@
           return;
         }
         for(let item of this.selectData){
+          this.insertFlowerSingel(item);
+        }
+      },
+     async allPatchInsert(){
+          const res = await this.getFlowerList({
+            type: 'news',
+            offest: 0,
+            count: this.page.total
+          });
+          let data = res.data.data.item;
+          let flowerList = [];
+          for (let item of data) {
+             flowerList.push({
+              media_id: item.media_id,
+              update_time: item.update_time,
+              author: item.content.news_item[0].author,
+              // content:"<p><img src=\"http://img01.store.sogou.com/net/a/04/link?appid=100520029&url="+item.content.news_item[0].thumb_url.replace('http','https')+"\"/></p></br>"+this.getChinese(item.content.news_item[0].content)+"</br><a style='color: #f7f110;text-decoration: #fff' target='_blank' href="+item.content.news_item[0].url+">为了更好的体验,请点击查看原文>>>>>>>>>></a>",
+              // content:"<img src=\""+item.content.news_item[0].thumb_url.replace('http','https')+"\"/>"+this.getChinese(item.content.news_item[0].content)+"</br><a style='color: #f7f110;text-decoration: #fff' target='_blank' href="+item.content.news_item[0].url+">为了更好的体验,请点击查看原文>>>>>>>>>></a>",
+              content: this.formatPara(item.content.news_item[0]),
+              digest: item.content.news_item[0].digest,
+              title: item.content.news_item[0].title,
+              url: item.content.news_item[0].url,
+              thumb_url: item.content.news_item[0].thumb_url,
+              tag: this.formatTag(item.content.news_item[0].title)
+            });
+          }
+        for(let item of flowerList){
           this.insertFlowerSingel(item);
         }
       },
